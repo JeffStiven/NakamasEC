@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAKAMAS_EC</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="nakamas.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">NAKAMAS ✦</a>
+  <ul class="nav-links">
+    <li><a href="#categorias">Categorías</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#porque">Nosotros</a></li>
+    <li><a href="#newsletter" class="nav-cta">¡Unirse!</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">✦ LLAVEROS FAN MERCH ✦</div>
+      <h1 class="hero-title">LLAVEROS<br><span>PARA FANS</span><br>COMO TÚ</h1>
+      <p class="hero-sub">Llaveros con tus personajes, series y contenido favorito. Resistentes, coloridos y con diseños exclusivos. ¡Envíos a todo el país! 🚀</p>
+      <div class="hero-btns">
+        <a href="#productos" class="btn-primary">🛒 Ver Catálogo</a>
+        <a href="#categorias" class="btn-secondary">🎌 Categorías</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">5★</div><div class="stat-label">Calificación</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-logo-wrap">
+        <div class="hero-logo-ring"></div>
+        <div class="hero-logo-bg">
+          <img src="images/logo.png" alt="NAKAMAS Logo" class="hero-logo">
+        </div>
+        <span class="sparkle">✨</span>
+        <span class="sparkle">⭐</span>
+        <span class="sparkle">💫</span>
+        <span class="sparkle">🌟</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span>LLAVEROS FAN MERCH</span><span class="dot">✦</span>
+    <span>TUS FAVORITOS</span><span class="dot">✦</span>
+    <span>DISEÑOS ÚNICOS</span><span class="dot">✦</span>
+    <span>PARA FANS</span><span class="dot">✦</span>
+    <span>100% CALIDAD</span><span class="dot">✦</span>
+    <span>ENVÍO RÁPIDO</span><span class="dot">✦</span>
+    <span>LLAVEROS FAN MERCH</span><span class="dot">✦</span>
+    <span>TUS FAVORITOS</span><span class="dot">✦</span>
+    <span>CONTENIDO MERCH</span><span class="dot">✦</span>
+    <span>DISEÑOS ÚNICOS</span><span class="dot">✦</span>
+    <span>PARA FANS</span><span class="dot">✦</span>
+    <span>100% CALIDAD</span><span class="dot">✦</span>
+    <span>ENVÍO RÁPIDO</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- CATEGORÍAS -->
+<section id="categorias">
+  <p class="section-title reveal">Explora por <span style="color:var(--green)">Estilo</span></p>
+  <p class="section-sub reveal">Elige el tipo de llavero que te gusta 🎌</p>
+  <div class="cats-grid">
+    <a href="#productos" class="cat-card c1 reveal" data-category="Compartidos"><span class="cat-emoji">💘</span><div class="cat-name">Compartidos</div><div class="cat-count">+ diseños</div></a>
+    <a href="#productos" class="cat-card c3 reveal" data-category="Personalizados"><span class="cat-emoji">🎨</span><div class="cat-name">Personalizados</div><div class="cat-count">+ diseños</div></a>
+    <a href="#productos" class="cat-card c5 reveal" data-category="Anime"><span class="cat-emoji">🍥</span><div class="cat-name">Anime</div><div class="cat-count">+ diseños</div></a>
+  </div>
+</section>
+
+<!-- PRODUCTOS DESTACADOS -->
+<section id="productos">
+  <p class="section-title reveal">Llaveros <span>Destacados</span> ⚡</p>
+  <p class="section-sub reveal">Explora por categoría y desplázate para ver más.</p>
+  <div class="categories-container" id="productsGrid"></div>
+  <!-- El catálogo se presenta desde la base de datos de Supabase. La edición se realiza en admin.html -->
+</section>
+
+<div id="categoryModal" class="category-modal hidden">
+  <div class="category-modal-backdrop"></div>
+  <div class="category-modal-content reveal">
+    <button class="modal-close" type="button" aria-label="Cerrar ventana">×</button>
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Productos de <span id="modalCategoryName"></span></div>
+        <div class="modal-subtitle">Aquí están todos los productos de esta categoría.</div>
+      </div>
+    </div>
+    <div class="modal-products" id="modalProducts"></div>
+  </div>
+</div>
+
+<!-- PROMO BANNER -->
+<section id="promo">
+  <div class="promo-inner reveal">
+    <div>
+      <div class="promo-tag">⚡ OFERTA ⚡</div>
+      <h2 class="promo-title">Llaveros personalizados <span>LLEVA 2</span> a precio de locura</h2>
+      <p class="promo-desc">Aprovecha nuestro oferta. Combina diseños y lleva llaveros personalizados a precio de locos.</p>
+    </div>
+    <div class="promo-box">
+      <div class="promo-pct">2x3,5</div>
+      <div class="promo-pct-label">LLAVEROS</div>
+      <div class="promo-code">de corazon</div>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUÉ NAKAMAS -->
+<section id="porque">
+  <p class="section-title reveal">¿Por qué elegirnos?</p>
+  <p class="section-sub reveal" style="color:rgba(0,0,0,.6)">Los mejores llaveros fan merch del mercado 💚</p>
+  <div class="perks-grid">
+    <div class="perk reveal">
+      <div class="perk-icon">🚀</div>
+      <div class="perk-title">Envío Rápido</div>
+      <div class="perk-desc">Despacho en 24–48h a todo el país.</div>
+    </div>
+    <div class="perk reveal">
+      <div class="perk-icon">✨</div>
+      <div class="perk-title">Diseños Exclusivos</div>
+      <div class="perk-desc">Colecciones únicas basadas en tus favoritos. Lo que les encanta a los fans.</div>
+    </div>
+    <div class="perk reveal">
+      <div class="perk-icon">💪</div>
+      <div class="perk-title">Resistentes</div>
+      <div class="perk-desc">Materiales de calidad premium. Hechos para durar y usarse todos los días.</div>
+    </div>
+    <div class="perk reveal">
+      <div class="perk-icon">🎁</div>
+      <div class="perk-title">Empaque Premium</div>
+      <div class="perk-desc">Packaging especial listo para regalar. Perfecto para ti o para tus amigos fans.</div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section id="newsletter">
+  <p class="section-title reveal">¡Suscríbete a <span style="color:var(--red)">Nuestras</span> Novedades!</p>
+  <form id="newsletterForm" class="nl-form reveal">
+    <input id="newsletterName" type="text" class="nl-input" placeholder="Tu nombre" required>
+    <input id="newsletterEmail" type="email" class="nl-input" placeholder="Tu correo nakama@email.com" required>
+    <button id="newsletterButton" class="nl-btn" type="submit">¡Suscribirse!</button>
+  </form>
+  <div id="newsletterMessage" class="newsletter-message reveal"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">NAKAMAS ✦</div>
+      <p class="footer-tagline">Tu tienda de llaveros fan merch. Diseños para todos los fans. 💚</p>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Ayuda</div>
+      <ul class="footer-links">
+        <li><a href="#">Cómo comprar</a></li>
+        <li><a href="https://wa.me/593962308178">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Síguenos</div>
+      <ul class="footer-links">
+        <li><a href="https://www.instagram.com/nakamas_ec?igsh=MXJwcmQzZTg5eGh6NA==">Instagram</a></li>
+        <li><a href="https://www.tiktok.com/@nakamas.ec?_r=1&_t=ZS-967lt0TVEBO">TikTok</a></li>
+        <li><a href="https://www.facebook.com/share/1EVEigQrCD/">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 NAKAMAS — Todos los derechos reservados.</span>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('keydown', function(event) {
+    const target = event.target;
+    const isTyping = target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target.isContentEditable;
+    if (isTyping) return;
+
+    if (event.altKey && event.shiftKey && event.key.toLowerCase() === 'a') {
+      window.location.href = 'admin.html';
+    }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="module" src="main.js"></script>
+</body>
+</html>

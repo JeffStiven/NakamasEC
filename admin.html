@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - NAKAMAS_EC</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">NAKAMAS ✦</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Tienda</a></li>
+  </ul>
+</nav>
+
+<section id="adminPage">
+  <p class="section-title reveal">Panel privado de catálogo</p>
+  <p class="section-sub reveal">Edita productos con la base de datos de Supabase. Solo acceso administrador.</p>
+
+  <div class="admin-auth reveal" id="adminAuth">
+    <form id="authForm" class="product-form">
+      <div class="form-row">
+        <label for="adminEmail">Correo electrónico</label>
+        <input id="adminEmail" type="email" required placeholder="tu correo admin de Supabase">
+      </div>
+      <div class="form-row">
+        <label for="adminPassword">Contraseña de administrador</label>
+        <input id="adminPassword" type="password" required placeholder="Ingresa la contraseña">
+      </div>
+      <div class="form-actions">
+        <button class="btn-primary" type="submit">Ingresar</button>
+        <button class="btn-secondary" type="button" id="createAdminBtn">Crear cuenta admin</button>
+      </div>
+      <p class="admin-help">Usa tu correo y contraseña de Supabase. Si el admin no existe, crea la cuenta y confirma el correo antes de iniciar sesión.</p>
+      <div id="authError" class="auth-error hidden"></div>
+    </form>
+  </div>
+
+  <div class="admin-panel hidden reveal" id="adminPanel">
+    <div class="admin-header">
+      <div>
+        <div class="admin-title">Editor de productos</div>
+        <div class="admin-note">Los cambios se guardan directamente en la base de datos de Supabase.</div>
+      </div>
+      <button id="logoutBtn" class="btn-secondary" type="button">Salir</button>
+    </div>
+
+    <form id="adminForm" class="product-form">
+      <input type="hidden" id="productId">
+      <div class="form-row">
+        <label for="productName">Nombre del producto</label>
+        <input id="productName" type="text" required placeholder="Ej. Pulsera Luffy Pirate King">
+      </div>
+      <div class="form-row">
+        <label for="productSeries">Categoría</label>
+        <select id="productSeries" required>
+          <option value="">Selecciona una categoría</option>
+          <option value="Compartidos">Compartidos</option>
+          <option value="Personalizados">Personalizados</option>
+          <option value="Anime">Anime</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="productDescription">Descripción</label>
+        <textarea id="productDescription" rows="3" required placeholder="Descripción breve del producto"></textarea>
+      </div>
+      <div class="form-row">
+        <label for="productPrice">Precio</label>
+        <input id="productPrice" type="text" required placeholder="Ej. $12">
+      </div>
+      <div class="form-row">
+        <label for="productImageFile">Imagen del producto</label>
+        <input id="productImageFile" type="file" accept="image/*">
+        <small class="input-hint">Elige una imagen desde tu celular o PC. Se cargará en el formulario automáticamente.</small>
+      </div>
+      <input id="productImage" type="hidden" required>
+      <div class="form-row image-preview-row">
+        <label>Vista previa de la imagen</label>
+        <div id="imagePreview" class="image-preview">No hay imagen seleccionada</div>
+      </div>
+      <div class="form-actions">
+        <button class="btn-primary" type="submit" id="saveBtn">Guardar producto</button>
+        <button class="btn-secondary" type="button" id="cancelBtn">Cancelar</button>
+      </div>
+    </form>
+
+    <div class="admin-list-wrap">
+      <div class="admin-list-title">Productos en la base de datos</div>
+      <div id="adminList" class="admin-list"></div>
+    </div>
+  </div>
+
+  <!-- Image Crop Editor Modal -->
+  <div id="imageCropModal" class="crop-modal hidden">
+    <div class="crop-modal-content">
+      <div class="crop-modal-header">
+        <h3>Ajustar imagen</h3>
+        <button type="button" class="crop-close-btn" id="cropCloseBtn">✕</button>
+      </div>
+      <div class="crop-modal-body">
+        <div class="crop-preview-container">
+          <div class="crop-frame">
+            <canvas id="cropCanvas"></canvas>
+            <div class="crop-overlay" id="cropOverlay"></div>
+          </div>
+          <div class="crop-controls">
+            <label>
+              <span>Zoom:</span>
+              <input type="range" id="zoomSlider" min="1" max="3" step="0.1" value="1">
+              <span id="zoomValue">100%</span>
+            </label>
+            <div class="crop-buttons">
+              <button type="button" class="btn-secondary" id="cropCancelBtn">Cancelar</button>
+              <button type="button" class="btn-primary" id="cropConfirmBtn">Aplicar recorte</button>
+            </div>
+          </div>
+        </div>
+        <div class="crop-info">
+          <small>Arrastra la imagen para seleccionar la parte que deseas ver. Usa el zoom para ajustar.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>
