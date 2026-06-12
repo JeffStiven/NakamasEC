@@ -226,17 +226,19 @@
     }
   });
 
-  // Desbloqueo móvil oculto por pulsación larga en el logo
+  // Desbloqueo móvil oculto por 5 toques en el logo
   (function(){
-    const PIN = '160522'; 
-    const LONG_PRESS_MS = 700;
+    const PIN = '160522';
+    const LOGO_TAP_COUNT = 5;
+    const TAP_TIMEOUT_MS = 1200;
     const logo = document.querySelector('.hero-logo-wrap');
     const modal = document.getElementById('mobileUnlock');
     const pinInput = document.getElementById('unlockPin');
     const unlockBtn = document.getElementById('unlockBtn');
     const closeBtn = document.getElementById('unlockClose');
     const errorBox = document.getElementById('unlockError');
-    let pressTimer = null;
+    let tapCount = 0;
+    let resetTimer = null;
 
     function showModal(){
       modal.classList.remove('hidden');
@@ -251,6 +253,14 @@
       errorBox.textContent = '';
     }
 
+    function resetTapCount(){
+      tapCount = 0;
+      if(resetTimer){
+        clearTimeout(resetTimer);
+        resetTimer = null;
+      }
+    }
+
     function tryUnlock(){
       const val = (pinInput.value || '').trim();
       if(val === PIN){
@@ -263,12 +273,22 @@
     }
 
     if(logo){
-      logo.addEventListener('touchstart', function(e){
-        if(e.touches && e.touches.length>1) return;
-        pressTimer = setTimeout(showModal, LONG_PRESS_MS);
+      logo.addEventListener('touchend', function(e){
+        if(e.changedTouches && e.changedTouches.length > 1) return;
+
+        tapCount += 1;
+        if(resetTimer){
+          clearTimeout(resetTimer);
+        }
+
+        if(tapCount >= LOGO_TAP_COUNT){
+          resetTapCount();
+          showModal();
+          return;
+        }
+
+        resetTimer = setTimeout(resetTapCount, TAP_TIMEOUT_MS);
       }, {passive:true});
-      logo.addEventListener('touchend', function(){ clearTimeout(pressTimer); });
-      logo.addEventListener('touchmove', function(){ clearTimeout(pressTimer); });
     }
 
     unlockBtn.addEventListener('click', tryUnlock);
