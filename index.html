@@ -199,32 +199,61 @@
     }
   });
 
-  // Gesto móvil: mantener pulsado el logo para entrar a admin.html
+  // Gesto móvil: 5 toques en el recuadro de calificación para entrar a admin.html
   (function(){
-    const LONG_PRESS_MS = 700;
-    const logo = document.querySelector('.hero-logo-wrap');
-    let pressTimer = null;
+    const TAP_COUNT = 5;
+    const TAP_TIMEOUT_MS = 1200;
+    const statBox = document.querySelector('.hero-stats .stat');
+    let taps = 0;
+    let resetTimer = null;
 
     function goToAdmin(){
       window.location.href = 'admin.html';
     }
 
-    if(logo){
-      logo.addEventListener('touchstart', function(e){
-        if(e.touches && e.touches.length > 1) return;
-        pressTimer = setTimeout(goToAdmin, LONG_PRESS_MS);
+    function resetTaps(){
+      taps = 0;
+      if(resetTimer){
+        clearTimeout(resetTimer);
+        resetTimer = null;
+      }
+    }
+
+    if(statBox){
+      statBox.addEventListener('touchend', function(e){
+        if(e.changedTouches && e.changedTouches.length > 1) return;
+
+        taps += 1;
+        if(resetTimer){
+          clearTimeout(resetTimer);
+        }
+
+        if(taps >= TAP_COUNT){
+          resetTaps();
+          goToAdmin();
+          return;
+        }
+
+        resetTimer = setTimeout(resetTaps, TAP_TIMEOUT_MS);
       }, {passive:true});
 
-      logo.addEventListener('touchend', function(){
-        clearTimeout(pressTimer);
-      });
+      statBox.addEventListener('click', function(){
+        taps += 1;
+        if(resetTimer){
+          clearTimeout(resetTimer);
+        }
 
-      logo.addEventListener('touchmove', function(){
-        clearTimeout(pressTimer);
+        if(taps >= TAP_COUNT){
+          resetTaps();
+          goToAdmin();
+          return;
+        }
+
+        resetTimer = setTimeout(resetTaps, TAP_TIMEOUT_MS);
       });
     }
 
-    window.addEventListener('resize', function(){ if(window.innerWidth > 900) { clearTimeout(pressTimer); } });
+    window.addEventListener('resize', function(){ if(window.innerWidth > 900) { resetTaps(); } });
   })();
 </script>
 
